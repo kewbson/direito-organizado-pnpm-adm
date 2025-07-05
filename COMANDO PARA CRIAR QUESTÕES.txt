@@ -1,0 +1,73 @@
+Você é um especialista em criar questões de múltipla escolha para estudantes de Direito no Brasil.
+Sua tarefa é gerar 50 questões sobre "Direito contitucional - Direitos Fundamentais".
+Para cada questão, siga estritamente a seguinte estrutura de exemplo:
+
+[
+  {
+    "id": 1,
+    "pergunta": "A extinção de um ato administrativo válido por razões de conveniência e oportunidade, respeitando os direitos adquiridos, é denominada:",
+    "opcoes": [
+      "Anulação",
+      "Cassação",
+      "Caducidade",
+      "Revogação"
+    ],
+    "resposta_correta": 3,
+    "explicacao": "A Revogação é a extinção de um ato administrativo por motivos de mérito (conveniência e oportunidade), operando efeitos 'ex nunc' (prospectivos). A anulação, por outro lado, ocorre por vício de legalidade e tem efeitos 'ex tunc' (retroativos).",
+    "periodo": 6
+  },
+  {
+    "id": 2,
+    "pergunta": "São atributos do ato administrativo, EXCETO:",
+    "opcoes": [
+      "Presunção de legitimidade",
+      "Autoexecutoriedade",
+      "Imperatividade",
+      "Revogabilidade"
+    ],
+    "resposta_correta": 3,
+    "explicacao": "Os atributos clássicos são a Presunção de legitimidade, Autoexecutoriedade, Tipicidade e Imperatividade (PATI). A revogabilidade não é um atributo, mas sim uma forma de extinção que não se aplica a todos os atos (ex: atos que geraram direitos adquiridos).",
+    "periodo": 6
+  },
+  {
+    "id": 3,
+    "pergunta": "A responsabilidade civil do Estado brasileiro, por atos comissivos de seus agentes, que causem dano a terceiros, é, em regra, regida pela teoria:",
+    "opcoes": [
+      "Da Culpa Administrativa (subjetiva)",
+      "Do Risco Integral",
+      "Do Risco Administrativo (objetiva)",
+      "Da Culpa Comum ou Civil"
+    ],
+    "resposta_correta": 2,
+    "explicacao": "Conforme o Art. 37, § 6º da Constituição Federal, o Brasil adota a teoria do Risco Administrativo, que prevê a responsabilidade objetiva do Estado. Ela admite excludentes de responsabilidade (como culpa exclusiva da vítima), diferentemente da teoria do Risco Integral.",
+    "periodo": 6
+  },
+  {
+    "id": 4,
+    "pergunta": "De acordo com a Nova Lei de Licitações (Lei nº 14.133/2021), um dos novos princípios expressos que não constava na Lei nº 8.666/93 é o do(a):",
+    "opcoes": [
+      "Julgamento Objetivo",
+      "Legalidade",
+      "Planejamento",
+      "Vinculação ao instrumento convocatório"
+    ],
+    "resposta_correta": 2,
+    "explicacao": "A Lei 14.133/2021 elevou o Planejamento à categoria de princípio expresso (Art. 5º), reforçando a necessidade de uma fase preparatória robusta nas contratações públicas, o que era apenas implícito na legislação anterior.",
+    "periodo": 6
+  },
+  {
+    "id": 5,
+    "pergunta": "Um bem público de uso especial, como um prédio onde funciona uma secretaria municipal, pode ser vendido a um particular?",
+    "opcoes": [
+      "Não, pois bens públicos são absolutamente inalienáveis.",
+      "Sim, desde que seja previamente desafetado, tornando-se um bem dominical.",
+      "Sim, a qualquer momento, por decisão do Prefeito.",
+      "Não, apenas bens de uso comum do povo podem ser vendidos."
+    ],
+    "resposta_correta": 1,
+    "explicacao": "A inalienabilidade dos bens públicos é relativa. Um bem de uso especial (afetado a um serviço público) precisa primeiro ser 'desafetado', ou seja, perder sua finalidade pública, tornando-se um bem dominical, para só então poder ser alienado, seguindo as regras legais (como licitação).",
+    "periodo": 6
+  }
+]
+
+Formate a saída final como um único array de objetos JavaScript, sem nenhum texto, comentário ou explicação antes ou depois do array.
