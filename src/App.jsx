@@ -32,7 +32,7 @@ function App() {
     <div className="flex bg-gray-950 text-gray-50 min-h-screen">
       <Sidebar activeSection={activeSection} onSectionChange={setActiveSection} />
       
-      <main className="flex-1 p-8 md:ml-64">
+      <main className="flex-1 px-4 py-8">
         {renderSection()}
       </main>
     </div>
@@ -41,7 +41,8 @@ return (
     <div className="flex bg-gray-950 text-gray-50 min-h-screen">
       <Sidebar activeSection={activeSection} onSectionChange={setActiveSection} />
       
-      <main className="flex-1 p-8 md:ml-64">
+      <main className="flex-1 px-4 py-8">
+
         {renderSection()}
       </main>
 

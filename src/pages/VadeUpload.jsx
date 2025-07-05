@@ -105,11 +105,11 @@ const handleSubmit = async () => {
   };
     
     return (
-    <div className="max-w-5xl"> 
-      <div className="space-y-6">
+    <div className="space-y-6 w-200 items-center justify-center">
+      <div className="w-full max-w-5xl space-y-6">
         <h1 className="text-3xl font-bold">Upload de Lei Completa - Vade Mecum</h1>
         
-        <Card>
+        <Card className="bg-gray-900 text-gray-100 border border-gray-800">
           <CardHeader>
             <CardTitle>Instruções</CardTitle>
             <CardDescription>
@@ -137,7 +137,7 @@ const handleSubmit = async () => {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-gray-900 text-gray-100 border border-gray-800">
           <CardHeader>
             <CardTitle>Formulário de Upload</CardTitle>
           </CardHeader>

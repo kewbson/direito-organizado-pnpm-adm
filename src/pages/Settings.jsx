@@ -65,6 +65,7 @@ export function SettingsPage() {
 
   const handleRestore = () => {
     const confirmation = window.confirm(
+        
       "ATENÇÃO: A restauração irá SOBRESCREVER todos os dados existentes no Vade Mecum e nos Quizzes com os dados do arquivo de backup. Esta ação não pode ser desfeita. Deseja continuar?"
     );
 
@@ -101,10 +102,11 @@ export function SettingsPage() {
   };
     
 return (
-    <div className="max-w-5xl space-y-6">
+    <div className="flex items-center justify-center min-h-screen px-4">
+  <div className="w-full max-w-5xl space-y-6">
       <h1 className="text-3xl font-bold">Configurações de Desenvolvedor</h1>
 
-      <Card>
+      <Card className="bg-gray-900 text-gray-100 border border-gray-800">
         <CardHeader>
           <CardTitle>Backup e Restauração</CardTitle>
           <CardDescription>
@@ -112,7 +114,7 @@ return (
           </CardDescription>
         </CardHeader>
         <CardContent>
-           <Alert variant="destructive" className="mb-4">
+           <Alert variant="destructive"  className="bg-gray-900 text-gray-100 border border-gray-800" mb-4>
             <AlertTriangle className="h-4 w-4" />
             <AlertTitle>Atenção: Use com Cuidado</AlertTitle>
             <AlertDescription>
@@ -124,15 +126,15 @@ return (
               <Download className="mr-2 h-4 w-4" />
               {isBackingUp ? 'Gerando Backup...' : 'Fazer Backup Completo'}
             </Button>
-            <Button onClick={handleRestore} disabled={isRestoring} variant="outline">
-              <Upload className="mr-2 h-4 w-4" />
+            <Button onClick={handleRestore} disabled={isRestoring} >
+              <Upload/>
               {isRestoring ? 'Restaurando...' : 'Restaurar de um Arquivo'}
             </Button>
           </div>
         </CardContent>
       </Card>
       
-      <Card>
+      <Card  className="bg-gray-900 text-gray-100 border border-gray-800">
         <CardHeader>
           <CardTitle>Popular Banco de Dados com Amostra</CardTitle>
           <CardDescription>
@@ -149,6 +151,7 @@ return (
           </Button>
         </CardContent>
       </Card>
-    </div>
+     </div>
+</div>
   );
 }

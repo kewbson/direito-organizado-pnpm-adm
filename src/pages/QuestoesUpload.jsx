@@ -90,11 +90,11 @@ export function QuestoesUploadPage() {
   };
 
   return (
-    <div className="max-w-1xl">
-      <div className="space-y-6">
+    <div className="flex items-center justify-center min-h-screen px-4">
+  <div className="w-full max-w-5xl space-y-6">
         <h1 className="text-3xl font-bold">Upload em Massa - Questões</h1>
         
-        <Card>
+        <Card className="bg-gray-900 text-gray-100 border border-gray-800">
           <CardHeader>
             <CardTitle>Instruções</CardTitle>
           </CardHeader>
@@ -115,7 +115,7 @@ export function QuestoesUploadPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-gray-900 text-gray-100 border border-gray-800">
           <CardHeader>
             <CardTitle>Enviar Novas Questões</CardTitle>
           </CardHeader>
