@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { CheckCircle, AlertTriangle, Upload } from 'lucide-react';
+import { CheckCircle, AlertTriangle, Upload, HelpCircle, Code } from 'lucide-react';
 import { toast } from 'sonner';
 import { batchUploadQuestoes } from '../services/uploadService';
 
@@ -33,7 +33,7 @@ const jsonExample = `[
 
 export function QuestoesUploadPage() {
   const [jsonText, setJsonText] = useState('');
-  const [subjectId, setSubjectId] = useState(''); // Estado para o ID da matéria
+  const [subjectId, setSubjectId] = useState('');
   const [validationResult, setValidationResult] = useState(null);
   const [validatedData, setValidatedData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -83,6 +83,7 @@ export function QuestoesUploadPage() {
       setJsonText('');
       setValidationResult(null);
       setValidatedData(null);
+      setSubjectId('');
     } else {
       toast.error("Ocorreu um erro no envio.", { description: result.error });
     }
@@ -90,73 +91,138 @@ export function QuestoesUploadPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen px-4">
-  <div className="w-full max-w-5xl space-y-6">
-        <h1 className="text-3xl font-bold">Upload em Massa - Questões</h1>
-        
-        <Card className="bg-gray-900 text-gray-100 border border-gray-800">
+    <div className="space-y-8 p-4 md:p-6">
+      {/* Header */}
+      <div className="flex items-center gap-4 mb-8">
+        <div className="p-3 bg-purple-600/20 rounded-lg">
+          <HelpCircle className="h-8 w-8 text-purple-400" />
+        </div>
+        <div>
+          <h1 className="text-3xl font-bold text-gray-50">Upload de Questões</h1>
+          <p className="text-gray-400">Envio em massa de questões para quiz</p>
+        </div>
+      </div>
+
+      <div className="max-w-6xl space-y-6">
+        {/* Card de Instruções */}
+        <Card className="bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700">
           <CardHeader>
-            <CardTitle>Instruções</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground mb-4">
+            <CardTitle className="flex items-center gap-2 text-gray-50">
+              <Code className="h-5 w-5 text-blue-400" />
+              Instruções de Uso
+            </CardTitle>
+            <CardDescription className="text-gray-400">
               Primeiro, digite o ID do documento da matéria (ex: `direito-constitucional`) que receberá estas questões. Depois, cole o array de objetos JSON.
-            </p>
-            <p className="text-sm font-semibold mb-2">Estrutura de cada objeto de questão:</p>
-            <pre className="text-xs bg-gray-800 text-gray-200 p-4 rounded-md overflow-x-auto">
-              {`{
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <p className="text-sm font-semibold mb-3 text-gray-300">Estrutura de cada objeto de questão:</p>
+              <pre className="text-xs bg-gray-950 text-gray-200 p-4 rounded-lg overflow-x-auto border border-gray-700">
+                {`{
   "q": "string (pergunta)",
   "opts": ["string", "string", "string", "string"],
   "a": "number (0 a 3, índice da resposta correta)",
   "expl": "string (explicação, opcional)",
   "periodo": "number (período/nível, opcional)"
 }`}
-            </pre>
+              </pre>
+            </div>
+            
+            <div>
+              <p className="text-sm font-semibold mt-6 mb-3 text-gray-300">Exemplo de um JSON válido:</p>
+              <pre className="text-xs bg-gray-950 text-gray-200 p-4 rounded-lg overflow-x-auto border border-gray-700">
+                {jsonExample}
+              </pre>
+            </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gray-900 text-gray-100 border border-gray-800">
+        {/* Card do Formulário */}
+        <Card className="bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700">
           <CardHeader>
-            <CardTitle>Enviar Novas Questões</CardTitle>
+            <CardTitle className="flex items-center gap-2 text-gray-50">
+              <Upload className="h-5 w-5 text-purple-400" />
+              Enviar Novas Questões
+            </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <Label htmlFor="subjectId">ID da Matéria (do Firebase)</Label>
+          <CardContent className="space-y-6">
+            <div className="space-y-2">
+              <Label htmlFor="subjectId" className="text-gray-300 font-medium">
+                ID da Matéria (Firebase)
+              </Label>
               <Input
                 id="subjectId"
                 value={subjectId}
                 onChange={(e) => setSubjectId(e.target.value)}
-                placeholder="Ex: direito-constitucional"
-                className="mt-1"
+                placeholder="Ex: direito-constitucional, direito-civil"
+                className="bg-gray-700 border-gray-600 text-gray-50 placeholder-gray-400 focus:border-purple-500 focus:ring-purple-500"
               />
+              <p className="text-xs text-gray-400">ID do documento da matéria no Firebase</p>
             </div>
-            <div>
-              <Label htmlFor="json-content">Cole seu JSON de questões aqui</Label>
+
+            <div className="space-y-2">
+              <Label htmlFor="json-content" className="text-gray-300 font-medium">
+                JSON das Questões
+              </Label>
               <Textarea
                 id="json-content"
                 value={jsonText}
                 onChange={(e) => setJsonText(e.target.value)}
-                placeholder="[ { ... }, { ... } ]"
-                rows={15}
-                className="font-mono text-sm mt-1"
+                placeholder="Cole aqui o array JSON com as questões..."
+                rows={16}
+                className="font-mono text-sm bg-gray-700 border-gray-600 text-gray-50 placeholder-gray-400 focus:border-purple-500 focus:ring-purple-500"
               />
             </div>
+
+            {/* Resultado da Validação */}
             {validationResult && (
-              <Alert variant={validationResult.success ? 'default' : 'destructive'}>
-                {validationResult.success ? <CheckCircle className="h-4 w-4" /> : <AlertTriangle className="h-4 w-4" />}
-                <AlertTitle>{validationResult.success ? 'Sucesso!' : 'Erro de Validação'}</AlertTitle>
+              <Alert 
+                variant={validationResult.success ? 'default' : 'destructive'} 
+                className={`mt-6 ${validationResult.success 
+                  ? 'bg-green-900/50 border-green-700 text-green-100' 
+                  : 'bg-red-900/50 border-red-700 text-red-100'
+                }`}
+              >
+                {validationResult.success ? 
+                  <CheckCircle className="h-4 w-4" /> : 
+                  <AlertTriangle className="h-4 w-4" />
+                }
+                <AlertTitle>
+                  {validationResult.success ? 'Validação Bem-sucedida!' : 'Erro de Validação'}
+                </AlertTitle>
                 <AlertDescription>{validationResult.message}</AlertDescription>
               </Alert>
             )}
-            <div className="flex gap-4 mt-4">
-              <Button onClick={handleValidate} disabled={isLoading}>Validar JSON</Button>
+
+            {/* Botões de Ação */}
+            <div className="flex flex-col sm:flex-row gap-4 mt-6">
+              <Button 
+                onClick={handleValidate} 
+                disabled={isLoading}
+                variant="outline"
+                className="bg-gray-700 border-gray-600 text-gray-50 hover:bg-gray-600 hover:text-white"
+              >
+                <Code className="mr-2 h-4 w-4" />
+                Validar JSON
+              </Button>
+              
               <Button
                 onClick={handleSubmit}
                 disabled={!validationResult?.success || isLoading}
-                className="bg-green-600 hover:bg-green-700"
+                className="bg-purple-600 hover:bg-purple-700 text-white"
               >
-                {isLoading ? 'Enviando...' : 'Enviar para o Firebase'}
-                <Upload className="ml-2 h-4 w-4" />
+                {isLoading ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    Enviando...
+                  </>
+                ) : (
+                  <>
+                    <Upload className="mr-2 h-4 w-4" />
+                    Enviar para o Firebase
+                  </>
+                )}
               </Button>
             </div>
           </CardContent>
@@ -165,3 +231,4 @@ export function QuestoesUploadPage() {
     </div>
   );
 }
+

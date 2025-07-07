@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { LayoutDashboard, Upload, FileText, Settings, LogOut, Menu, X } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 // Itens do menu do nosso painel de administração
 const menuItems = [
@@ -11,17 +12,23 @@ const menuItems = [
 
 export function Sidebar({ activeSection, onSectionChange }) {
   const [isOpen, setIsOpen] = useState(false);
+  const { logout } = useAuth();
 
   const handleSectionChange = (sectionId) => {
     onSectionChange(sectionId);
     setIsOpen(false); // Fecha a sidebar no mobile após a seleção
   };
 
+  const handleLogout = async () => {
+    await logout();
+  };
+
   const SidebarContent = () => (
     <div className="flex flex-col h-full bg-gray-900 text-gray-200 border-r border-gray-800">
       {/* Header */}
       <div className="p-4 border-b border-gray-800 text-center">
-        <h2 className="text-xl font-mono font-bold">[ Admin Panel ]</h2>
+        <h2 className="text-xl font-mono font-bold text-blue-400">[ Admin Panel ]</h2>
+        <p className="text-sm text-gray-400 mt-1">Direito Organizado</p>
       </div>
 
       {/* Navegação */}
@@ -35,10 +42,10 @@ export function Sidebar({ activeSection, onSectionChange }) {
               <li key={item.id}>
                 <button
                   onClick={() => handleSectionChange(item.id)}
-                  className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors duration-200 ${
+                  className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
                     isActive 
-                      ? 'bg-green-400/20 text-green-300' 
-                      : 'hover:bg-gray-800'
+                      ? 'bg-blue-600/20 text-blue-300 border border-blue-600/30' 
+                      : 'hover:bg-gray-800 hover:text-white'
                   }`}
                 >
                   <Icon className="h-5 w-5" />
@@ -53,8 +60,8 @@ export function Sidebar({ activeSection, onSectionChange }) {
       {/* Logout */}
       <div className="p-4 border-t border-gray-800">
         <button
-          // onClick={logout} // Adicionaremos a função de logout depois
-          className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors duration-200 hover:bg-red-500/20 text-red-400"
+          onClick={handleLogout}
+          className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 hover:bg-red-500/20 text-red-400 hover:text-red-300"
         >
           <LogOut className="h-5 w-5" />
           <span className="font-medium">Sair</span>
@@ -67,8 +74,11 @@ export function Sidebar({ activeSection, onSectionChange }) {
     <>
       {/* Botão do Menu Mobile */}
       <div className="md:hidden fixed top-4 left-4 z-50">
-        <button onClick={() => setIsOpen(!isOpen)} className="p-2 rounded-md bg-gray-800 text-white">
-          {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        <button 
+          onClick={() => setIsOpen(!isOpen)} 
+          className="p-3 rounded-lg bg-gray-800 text-white shadow-lg hover:bg-gray-700 transition-colors"
+        >
+          {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
@@ -87,3 +97,4 @@ export function Sidebar({ activeSection, onSectionChange }) {
     </>
   );
 }
+
